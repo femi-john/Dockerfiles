@@ -1,0 +1,15 @@
+FROM golang:1.16
+
+ARG app_env
+ENV APP_ENV $app_env
+
+COPY ./go-web-server /go/src/github.com/Fullscript/go-web-server
+WORKDIR /go/src/github.com/Fullscript/go-web-server
+
+RUN go get ./
+RUN go build
+
+CMD ["go", "run", "go-web-server/main.go"]
+
+EXPOSE 3030
+~
