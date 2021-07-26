@@ -1,0 +1,16 @@
+# The base go-image
+FROM golang:1.14-alpine
+ARG PORT_ARG=3030
+# Create a directory for the app
+RUN mkdir /app
+# Copy all files from the current directory to the app directory
+COPY ./go-web-server /app
+# Set working directory
+WORKDIR /app
+ENV PORT=$PORT_ARG
+# go build will build an executable file named server in the current directory
+EXPOSE 3030
+RUN go build -o server .
+
+# Run the server executable
+CMD [ "/app/server" ]
